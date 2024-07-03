@@ -11,7 +11,7 @@
   - [PHP AD LDAP Authenticator](./Apps/PHP%20AD%20LDAP%20Authenticator/) - Basic Active Directory Authenticator for Kayako LoginShare v4.x. Integrates Active Directory with Kayako Helpdesk.
 - [Icons](./Icons/) - Some .ico files for custom tasks.
 - [Languages Custom](./Languages%20Custom/) - Customized English and Ukrainian .xml languages.
-- [Scripts](./Scripts/) - Scripts for checking [AD brute-force attempts](./Scripts/brute.sh) and [cleaning trash sessions](./Scripts/sessions.sh) (e.x. prometheus blackbox exporter etc.)
+- [Scripts](./Scripts/) - Scripts for checking [AD brute-force attempts](./Scripts/brute.sh), [cleaning trash sessions](./Scripts/sessions.sh) (e.x. prometheus blackbox exporter etc.) and [enabling-disabling users and staff](./Scripts/users.sh) according to AD.
 - [Source Stable](./Source%20Stable/) - Latest stable versions Kayako Fusion and GFI Helpdesks: 4.98.9 (working with PHP 7.x).
 - [Templates Custom](./Templates%20Custom/) - Customized templates for cleaning up unnecessary items.
 
@@ -369,4 +369,7 @@ Set crontab for root user:
 ```bash
 crontab -e
 */3 * * * * wget -O /dev/null --no-check-certificate https://helpdesk.dns.com/cron/index.php?/Parser/ParserMinute/POP3IMAP
+0 * * * *       /bin/bash /opt/audit/brute.sh
+*/15 * * * *    /bin/bash /opt/audit/sessions.sh
+5 20 * * *      /bin/bash /opt/audit/users.sh
 ```
