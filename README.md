@@ -369,9 +369,3 @@ crontab -e
 */15 * * * *    /bin/bash /opt/audit/sessions.sh
 5 20 * * *      /bin/bash /opt/audit/users.sh
 ```
-
----
-
-<a href="https://www.paypal.com/donate/?hosted_button_id=GWWLEXEF3XL92">
-  <img src="https://raw.githubusercontent.com/kraloveckey/kraloveckey/refs/heads/main/.assets/paypal-donate-button.png" alt="Donate with PayPal" width="225" height="100"/>
-</a>
