@@ -4,7 +4,7 @@
 
 - [Apps](./Apps/)
   - [PHP AD LDAP Authenticator](./Apps/PHP%20AD%20LDAP%20Authenticator/) – Basic Active Directory Authenticator for Kayako LoginShare v4.x. Integrates Active Directory with Kayako Helpdesk.
-  - [PHP Google LDAP Authenticator](.Apps/HP%20Google%20LDAP%20Authenticator/) – This project provides a bridge between Google Secure LDAP and Kayako Helpdesk (v4). It replaces the legacy Microsoft AD LoginShare with a secure, certificate-based authentication flow via a local [`Stunnel`](https://knowledge.workspace.google.com/admin/apps/connect-ldap-clients-to-the-secure-ldap-service) proxy.
+  - [PHP Google LDAP Authenticator](.Apps/PHP%20Google%20LDAP%20Authenticator/) – This project provides a bridge between Google Secure LDAP and Kayako Helpdesk (v4). It replaces the legacy Microsoft AD LoginShare with a secure, certificate-based authentication flow via a local [`Stunnel`](https://knowledge.workspace.google.com/admin/apps/connect-ldap-clients-to-the-secure-ldap-service) proxy.
   - [SAML Single Sign-On](./Apps/SAML%20Single%20Sign-On/) – Using single sign-on (SSO) will permit a single action of user authentication and authorization to access all computers and systems where he has access permission, without the need to enter multiple passwords.
 - [Icons](./Icons/) – Some `.ico` files for custom tasks.
 - [Languages Custom](./Languages%20Custom/) – Customized English and Ukrainian .xml languages.
