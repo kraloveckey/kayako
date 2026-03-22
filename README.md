@@ -3,13 +3,14 @@
 ## Overview
 
 - [Apps](./Apps/)
-  - [SAML Single Sign-On](./Apps/SAML%20Single%20Sign-On/) - Using single sign-on (SSO) will permit a single action of user authentication and authorization to access all computers and systems where he has access permission, without the need to enter multiple passwords.
-  - [PHP AD LDAP Authenticator](./Apps/PHP%20AD%20LDAP%20Authenticator/) - Basic Active Directory Authenticator for Kayako LoginShare v4.x. Integrates Active Directory with Kayako Helpdesk.
-- [Icons](./Icons/) - Some .ico files for custom tasks.
-- [Languages Custom](./Languages%20Custom/) - Customized English and Ukrainian .xml languages.
-- [Scripts](./Scripts/) - Scripts for checking [AD brute-force attempts](./Scripts/brute.sh), [cleaning trash sessions](./Scripts/sessions.sh) (e.x. prometheus blackbox exporter etc.) and [enabling-disabling users and staff](./Scripts/users.sh) according to AD.
-- [Source Stable](./Source%20Stable/) - Latest stable versions Kayako Fusion and GFI Helpdesks: 4.98.9 (working with PHP 7.x).
-- [Templates Custom](./Templates%20Custom/) - Customized templates for cleaning up unnecessary items.
+  - [PHP AD LDAP Authenticator](./Apps/PHP%20AD%20LDAP%20Authenticator/) – Basic Active Directory Authenticator for Kayako LoginShare v4.x. Integrates Active Directory with Kayako Helpdesk.
+  - [PHP Google LDAP Authenticator](.Apps/PHP%20Google%20LDAP%20Authenticator) – This project provides a bridge between Google Secure LDAP and Kayako Helpdesk (v4). It replaces the legacy Microsoft AD LoginShare with a secure, certificate-based authentication flow via a local [`Stunnel`](https://knowledge.workspace.google.com/admin/apps/connect-ldap-clients-to-the-secure-ldap-service) proxy.
+  - [SAML Single Sign-On](./Apps/SAML%20Single%20Sign-On/) – Using single sign-on (SSO) will permit a single action of user authentication and authorization to access all computers and systems where he has access permission, without the need to enter multiple passwords.
+- [Icons](./Icons/) – Some `.ico` files for custom tasks.
+- [Languages Custom](./Languages%20Custom/) – Customized English and Ukrainian .xml languages.
+- [Scripts](./Scripts/) – Scripts for checking [AD brute-force attempts](./Scripts/brute.sh), [cleaning trash sessions](./Scripts/sessions.sh) (e.x. prometheus blackbox exporter etc.) and [enabling-disabling users and staff](./Scripts/users.sh) according to AD.
+- [Source Stable](./Source%20Stable/) – Latest stable versions Kayako Fusion and GFI Helpdesks: 4.98.9 (working with PHP 7.x).
+- [Templates Custom](./Templates%20Custom/) – Customized templates for cleaning up unnecessary items.
 
 ## Install and Configure MariaDB
 
@@ -176,7 +177,7 @@ The following variables in this file need to be edited:
 - `$_DB["hostname"]` – Unless you have supplied a different hostname when creating your database, this variable should be set to `localhost`.
 - `$_DB["username"]` – Unless you have supplied a different user name when creating your database, this variable should be set to `kayako_user`.
 - `$_DB["password"]` – The variable should be set to the password that you supplied when setting up your database user.
-- `$_DB["name"]` - Unless you have supplied a different user name when creating your database, this variable should be set to `kayako_fusion`.
+- `$_DB["name"]` – Unless you have supplied a different user name when creating your database, this variable should be set to `kayako_fusion`.
 
 Upload `key.php` file with license in the root directory of helpdesk installation folder on the server.
 
@@ -311,7 +312,7 @@ server {
 }
 ```
 
-```bash
+```shell
 systemctl restart nginx php7.3-fpm.service
 ```
 
@@ -325,20 +326,18 @@ Now that your server is prepped, you're ready to start the installation itself:
 - You'll be asked to agree to the license terms, and then the setup utility will check to make sure your server meets all the requirements. When it's done, click Next.
 - Your next step is to create credentials for your default administrator account and supply some important details for your helpdesk. The Product URL should be the publicly accessible URL of your helpdesk, e.g., `https://yourdomain.com/support/`.
 
-> NOTE: 
->
+> [!NOTE]
 > You should only use the URL or domain that is registered on your account. Else, you will receive the error 'This domain name does not match the domain name in the license key file.' after the installation.
 
-- When you've filled in the details, click Start Setup to begin the automated setup procedure.
+- When you've filled in the details, click `Start Setup` to begin the automated setup procedure.
 
-> NOTE:
-> 
+> [!NOTE]
 > The automated portion of the setup script may take quite some time. Do not interrupt it for any reason or your installation will be corrupt and you'll have to start over! 
 
 - Once setup has completed, you'll see a success screen, and you'll only have one more step before you're ready to start using Kayako Classic!
 - Removing the `/setup` directory (**IMPORTANT!**).
 
-```bash
+```shell
 cd /var/www/helpdesk/
 mv setup/ ../
 ```
@@ -350,11 +349,15 @@ And that's it – congratulations on installing Kayako Classic Download!
 
 See [PHP AD LDAP Authenticator](./Apps/PHP%20AD%20LDAP%20Authenticator/).
 
+## Google Configuration
+
+See [PHP Google LDAP Authenticator](./Apps/PHP%20Google%20LDAP%20Authenticator/).
+
 ## Other Configuration
 
 Set timezone:
 
-```bash
+```shell
 timedatectl set-timezone Europe/CITY 
 ```
 
@@ -362,7 +365,7 @@ Also configure SSH and limits: `/etc/sysctl.conf`, `/etc/security/limits.conf`, 
 
 Set crontab for root user:
 
-```bash
+```shell
 crontab -e
 */3 * * * * wget -O /dev/null --no-check-certificate https://helpdesk.dns.com/cron/index.php?/Parser/ParserMinute/POP3IMAP
 0 * * * *       /bin/bash /opt/audit/brute.sh
