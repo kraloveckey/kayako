@@ -3,7 +3,7 @@
 This project provides a bridge between Google Secure LDAP and Kayako Helpdesk (v4). It replaces the legacy Microsoft AD LoginShare with a secure, certificate-based authentication flow via a local [`Stunnel`](https://knowledge.workspace.google.com/admin/apps/connect-ldap-clients-to-the-secure-ldap-service) proxy.
 
 > [!TIP]
-> If you need Google Workspace **and** Active Directory logins at the same time (one Kayako account per person), use [Google AD Authenticator](../Google%20AD%20Authenticator/).
+> If you need Google Workspace **and** Active Directory logins at the same time (one Kayako account per person), use [PHP Google AD Authenticator](../PHP%20Google%20AD%20Authenticator/).
 
 ## 1. Architectural Overview
 
@@ -83,7 +83,7 @@ UPDATE swstaff SET username = email WHERE username != email;
 ## 5. Technical Details
 
 - **User Filter**: The script searches for users using the filter `(mail=$user)`, so users log in with their full Google email. The value is escaped with `ldap_escape()` before it goes into the filter.
-- **Nested Groups**: Google Secure LDAP returns only direct groups in `memberOf`. `inGroup()` checks direct membership first, then reads the `member` list of the target group (one level of nesting: user → group A → target group). For deeper nesting, list the group in `nested_group_files` inside `$adldap_options` (`config.php`) and keep the membership file updated by cron, for example with [`sync_group_members.sh`](../Google%20AD%20Authenticator/sync_group_members.sh). A listed group is checked only against its file.
+- **Nested Groups**: Google Secure LDAP returns only direct groups in `memberOf`. `inGroup()` checks direct membership first, then reads the `member` list of the target group (one level of nesting: user → group A → target group). For deeper nesting, list the group in `nested_group_files` inside `$adldap_options` (`config.php`) and keep the membership file updated by cron, for example with [`sync_group_members.sh`](../../Scripts/sync_group_members.sh). A listed group is checked only against its file.
 - **Group Priority**: If a user belongs to multiple authorized groups, the script assigns the group listed first in the `$user_groups` array within `config.php`.
 - **Case Sensitivity**: PHP LDAP returns attribute keys in lowercase. The `Kayako_Google_LDAP` class automatically handles this to ensure data consistency.
 - **Encoding**: All XML output is encoded in UTF-8 and sanitized via `htmlspecialchars` to prevent rendering issues in the Kayako UI.

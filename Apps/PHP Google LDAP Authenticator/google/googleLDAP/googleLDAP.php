@@ -3,7 +3,7 @@
  * Core Google LDAP Library for Kayako
  * Simple replacement for adLDAP focused on Google Secure LDAP via stunnel
  *
- * Backported from Google AD Authenticator (googleLDAP 2.3.2):
+ * Backported from PHP Google AD Authenticator (googleLDAP 2.3.2):
  *   - service account rebind after the user bind
  *   - one level of nested groups + optional pre-built membership files
  *   - user filter values are escaped with ldap_escape()

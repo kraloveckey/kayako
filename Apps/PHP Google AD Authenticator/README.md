@@ -36,8 +36,6 @@ A user can log in with either their Google email + Google password, or their `sA
 google-ad-auth.php                    ← Kayako LoginShare entry point
 google-ad-auth_user.html              ← test form for user logins
 google-ad-auth_staff.html             ← test form for staff logins
-sync_group_members.sh                 ← copy to /etc/stunnel/ (nested groups, see Section 6)
-gbrute.sh                             ← copy to /opt/audit/ (brute force report, see Section 7)
 google-ad-auth/
   bootstrap.php                       ← loads both providers
   config.php                          ← all configuration (Google + AD + nested groups)
@@ -270,7 +268,7 @@ Both providers support nested group membership:
 
 If a group is listed in `$google_nested_group_files` in `config.php`, `inGroup()` skips all LDAP queries entirely and checks a pre-built flat file instead. This is faster (~0ms vs ~3s per group) and handles unlimited nesting depth.
 
-The flat files are maintained by a cron script. It allows only one run at a time (`flock`) and keeps the old file if `ldapsearch` fails:
+The flat files are maintained by a cron script, [`sync_group_members.sh`](../../Scripts/sync_group_members.sh). It allows only one run at a time (`flock`) and keeps the old file if `ldapsearch` fails:
 
 ```bash
 # /etc/stunnel/sync_group_members.sh — runs every hour
@@ -323,7 +321,7 @@ To enable logging, make `log/` writable (`chmod 755`) and set `KAYAKO_LDAP_LOG =
 
 **POST data logging (disabled by default):** To log POST data for debugging, uncomment one of the two blocks at the top of `google-ad-auth.php` — one masks the password, the other logs it in plain text.
 
-**Brute force monitoring:** [`gbrute.sh`](./gbrute.sh) (deployed as `/opt/audit/brute.sh`) scans the log hourly for `Authentication failed for user:` entries and sends an email report via swaks. Add to crontab:
+**Brute force monitoring:** [`gbrute.sh`](../../Scripts/gbrute.sh) (deployed as `/opt/audit/brute.sh`) scans the log hourly for `Authentication failed for user:` entries and sends an email report via swaks. Add to crontab:
 ```bash
 0 * * * * /opt/audit/brute.sh
 ```

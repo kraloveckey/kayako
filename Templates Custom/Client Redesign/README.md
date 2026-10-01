@@ -12,7 +12,7 @@ A redesign of the client area (support center) for users who log in through Logi
 ## What changes
 
 - **Header**: logo and brand name centered, widget links (except Home) in the top navigation, "My Account" dropdown (Profile, Organization, Preferences, Logout) on CSS hover, no JavaScript redirects.
-- **Login page**: single centered login card, field placeholders `GW Email | Domain Username` and `GW | Domain Password` (made for [Google AD Authenticator](../../Apps/Google%20AD%20Authenticator/)), error messages shown under the Login button.
+- **Login page**: single centered login card, field placeholders `GW Email | Domain Username` and `GW | Domain Password` (made for [PHP Google AD Authenticator](../../Apps/PHP%20Google%20AD%20Authenticator/)), error messages shown under the Login button.
 - **Home page**: a logged-in user is redirected from the home page straight to `Tickets/Submit`. Profile, Preferences, My Organization and Change Password pages are not redirected.
 - **Inner pages**: the left sidebar is hidden, content takes full width; the old toolbar (`#toptoolbar`, with the language selector) stays in the markup but is hidden, for JavaScript compatibility.
 - **Tickets**: restyled ticket list, properties bar, status/priority selects, ticket posts, Add Reply form, attachments.

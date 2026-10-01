@@ -5,14 +5,14 @@
 - [Apps](./Apps/)
   - [PHP AD LDAP Authenticator](./Apps/PHP%20AD%20LDAP%20Authenticator/) – Basic Active Directory Authenticator for Kayako LoginShare v4.x. Integrates Active Directory with Kayako Helpdesk.
   - [PHP Google LDAP Authenticator](./Apps/PHP%20Google%20LDAP%20Authenticator/) – This project provides a bridge between Google Secure LDAP and Kayako Helpdesk (v4). It replaces the legacy Microsoft AD LoginShare with a secure, certificate-based authentication flow via a local [`Stunnel`](https://knowledge.workspace.google.com/admin/apps/connect-ldap-clients-to-the-secure-ldap-service) proxy.
-  - [Google AD Authenticator](./Apps/Google%20AD%20Authenticator/) – A single LoginShare endpoint that supports Google Workspace LDAP and Active Directory at the same time, without duplicate accounts: users log in with a Google email or an AD `sAMAccountName`, nested groups are supported.
+  - [PHP Google AD Authenticator](./Apps/PHP%20Google%20AD%20Authenticator/) – A single LoginShare endpoint that supports Google Workspace LDAP and Active Directory at the same time, without duplicate accounts: users log in with a Google email or an AD `sAMAccountName`, nested groups are supported.
   - [Column Width Limit](./Apps/Column%20Width%20Limit/) – Prevents the `Subject` column from shrinking when more columns are added to the ticket overview (manual replacement for the Column Width Limit plugin).
   - [Ticket Cleaner](./Apps/Ticket%20Cleaner/) – SQL scripts to purge old tickets (older than 90 days by default) and tickets in the trash from the Kayako database.
   - [SAML Single Sign-On](./Apps/SAML%20Single%20Sign-On/) – Using single sign-on (SSO) will permit a single action of user authentication and authorization to access all computers and systems where he has access permission, without the need to enter multiple passwords.
 - [Bugs](./Bugs/) – Fixes for errors logged by Kayako 4.98.9 and the [parent department patch](./Bugs/Parent-Department.md) for ticket views and notifications.
 - [Icons](./Icons/) – Some `.ico` files for custom tasks.
 - [Languages Custom](./Languages%20Custom/) – Customized English and Ukrainian .xml languages.
-- [Scripts](./Scripts/) – Scripts for checking [AD brute-force attempts](./Scripts/brute.sh), [cleaning trash sessions](./Scripts/sessions.sh) (e.x. prometheus blackbox exporter etc.) and [enabling-disabling users and staff](./Scripts/users.sh) according to AD.
+- [Scripts](./Scripts/) – Scripts for checking [AD brute-force attempts](./Scripts/brute.sh), [Google + AD brute-force attempts](./Scripts/gbrute.sh), [syncing nested Google group members](./Scripts/sync_group_members.sh), [cleaning trash sessions](./Scripts/sessions.sh) (e.x. prometheus blackbox exporter etc.) and [enabling-disabling users and staff](./Scripts/users.sh) according to AD.
 - [Source Stable](./Source%20Stable/) – Latest stable versions Kayako Fusion and GFI Helpdesks: 4.98.9 (working with PHP 7.x).
 - [Templates Custom](./Templates%20Custom/) – Customized templates for cleaning up unnecessary items, and the [client area redesign](./Templates%20Custom/Client%20Redesign/) (header + custom CSS).
 
@@ -381,7 +381,7 @@ See [PHP AD LDAP Authenticator](./Apps/PHP%20AD%20LDAP%20Authenticator/).
 
 See [PHP Google LDAP Authenticator](./Apps/PHP%20Google%20LDAP%20Authenticator/).
 
-For Google Workspace and Active Directory together, see [Google AD Authenticator](./Apps/Google%20AD%20Authenticator/).
+For Google Workspace and Active Directory together, see [PHP Google AD Authenticator](./Apps/PHP%20Google%20AD%20Authenticator/).
 
 ## Other Configuration
 
