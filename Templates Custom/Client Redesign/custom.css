@@ -1,0 +1,1769 @@
+/*
+ * Kayako client area (support center) redesign - custom styles
+ */
+
+:root {
+    --primary:        #2563eb;
+    --primary-hover:  #1d4ed8;
+    --primary-light:  #eff6ff;
+    --primary-ring:   rgba(37,99,235,0.18);
+    --bg:             #f8fafc;
+    --surface:        #ffffff;
+    --border:         #e2e8f0;
+    --border-strong:  #cbd5e1;
+    --text:           #0f172a;
+    --text-muted:     #64748b;
+    --danger:         #dc2626;
+    --danger-strong:  #b91c1c;
+    --danger-bg:      #fef2f2;
+    --danger-border:  #fca5a5;
+    --danger-ring:    rgba(220,38,38,0.20);
+    --success:        #16a34a;
+    --radius:         8px;
+    --radius-sm:      6px;
+    --radius-lg:      12px;
+    --shadow-sm:      0 1px 2px 0 rgba(0,0,0,0.04);
+    --shadow:         0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+    --shadow-lg:      0 10px 25px -5px rgba(0,0,0,0.10), 0 4px 10px -2px rgba(0,0,0,0.04);
+    --header-h:       64px;
+    --font:           -apple-system, BlinkMacSystemFont, "Segoe UI", "Source Sans Pro", Roboto, Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0 !important; padding: 0 !important; }
+
+body.bodymain {
+    font-family: var(--font) !important;
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    min-width: 320px !important;   /* clientcss has min-width:980px, kill it */
+}
+a { color: var(--primary); text-decoration: none; }
+a:hover { color: var(--primary-hover); }
+button:focus, a:focus { outline: none; }
+
+/* =========================================================
+   HEADER — logo + brand name perfectly centered
+   Real HTML: <a class="hd-brand"><img class="hd-logo"><span class="hd-brand-name">
+   ========================================================= */
+#topbanner {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    background: var(--surface) !important;
+    border-bottom: 1px solid var(--border) !important;
+    height: var(--header-h) !important;
+    line-height: normal !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+#topbanner .hd-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: var(--header-h) !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important;
+    position: relative !important;
+}
+
+/* Center brand absolutely so it's truly centered regardless of nav width */
+.hd-brand {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    text-decoration: none !important;
+    flex-shrink: 0 !important;
+    line-height: 1 !important;
+    height: 100% !important;
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+.hd-brand:hover { text-decoration: none !important; }
+
+/* Push nav to the right — add invisible spacer on left to balance */
+.hd-nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin-left: auto !important;
+}
+
+/* Force image to sit on the same optical line as text */
+.hd-logo {
+    height: 28px !important;
+    width: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: middle !important;
+    flex-shrink: 0 !important;
+}
+.hd-brand-name {
+    display: inline-flex !important;
+    align-items: center !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    color: var(--text) !important;
+    letter-spacing: -0.01em !important;
+    white-space: nowrap !important;
+    line-height: 28px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 28px !important;
+}
+.hd-nav-link {
+    display: inline-flex !important; align-items: center !important;
+    height: 36px !important; padding: 0 14px !important;
+    border-radius: var(--radius-sm) !important;
+    font-size: 14px !important; font-weight: 500 !important;
+    color: var(--text-muted) !important; text-decoration: none !important;
+    transition: background 0.15s, color 0.15s !important;
+    white-space: nowrap !important;
+}
+.hd-nav-link:hover { background: var(--bg) !important; color: var(--text) !important; }
+.hd-nav-link.hd-nav-active { background: var(--primary-light) !important; color: var(--primary) !important; }
+
+/* Account dropdown — CSS-only hover */
+.hd-account-menu {
+    position: relative !important;
+    margin-left: 6px !important;
+    padding-bottom: 6px !important;
+    margin-bottom: -6px !important;
+}
+.hd-account-btn {
+    display: inline-flex !important; align-items: center !important;
+    gap: 8px !important;
+    height: 36px !important; padding: 0 12px !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text) !important;
+    font-size: 14px !important; font-weight: 500 !important; font-family: var(--font) !important;
+    cursor: pointer !important;
+    transition: background 0.15s, border-color 0.15s !important;
+    user-select: none !important;
+}
+.hd-account-menu:hover .hd-account-btn,
+.hd-account-btn:focus,
+.hd-account-btn:hover {
+    background: var(--bg) !important;
+    border-color: var(--border-strong) !important;
+}
+.hd-chevron { transition: transform 0.2s !important; opacity: 0.55; }
+.hd-account-menu:hover .hd-chevron { transform: rotate(180deg) !important; }
+
+.hd-dropdown {
+    position: absolute !important;
+    top: calc(100% + 4px) !important;
+    right: 0 !important;
+    min-width: 220px !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow-lg) !important;
+    overflow: hidden !important;
+    z-index: 200 !important;
+    padding: 4px !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-4px) !important;
+    transition: opacity 0.15s, transform 0.15s, visibility 0s linear 0.15s !important;
+    pointer-events: none !important;
+}
+.hd-account-menu:hover .hd-dropdown,
+.hd-account-menu:focus-within .hd-dropdown,
+.hd-dropdown:hover {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    transition: opacity 0.15s, transform 0.15s, visibility 0s !important;
+    pointer-events: auto !important;
+}
+
+/* Dropdown items — supports both <a> and <div class="maitem"> variants */
+.hd-dd-item, span.hd-dd-item, div.hd-dd-item,
+.hd-dropdown .maitem {
+    display: block !important;
+    padding: 10px 14px !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+    color: var(--text) !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 5px !important;
+    transition: background 0.12s !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    line-height: 1.3 !important;
+    text-align: left !important;
+    width: auto !important;
+}
+.hd-dd-item:hover, span.hd-dd-item:hover, div.hd-dd-item:hover,
+.hd-dropdown .maitem:hover {
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    cursor: pointer !important;
+}
+/* Kill FontAwesome icons that clientcss puts before .maitem text
+   (\f364 user, \f20c gear, \f2fc sign-out etc.) — they look out
+   of place in our minimal dropdown. */
+.hd-dropdown .maitem:before,
+.hd-dropdown .maprofile:before,
+.hd-dropdown .mapreferences:before,
+.hd-dropdown .maorganization:before,
+.hd-dropdown .machangepassword:before,
+.hd-dropdown .mabilling:before,
+.hd-dropdown .malogout:before {
+    content: "" !important;
+    display: none !important;
+    font-family: inherit !important;
+    font-size: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.hd-dd-divider { height: 1px !important; background: var(--border) !important; margin: 4px 0 !important; }
+.hd-dd-logout { color: var(--danger) !important; }
+.hd-dd-logout:hover { background: var(--danger-bg) !important; color: var(--danger) !important; }
+
+/* =========================================================
+   LAYOUT — override clientcss .innerwrapper and floats
+   ========================================================= */
+#maincore {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important;
+    width: 100% !important;
+}
+#maincore .innerwrapper {
+    display: flex !important;
+    gap: 24px !important;
+    align-items: flex-start !important;
+    padding: 28px 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+}
+/* The innerwrapper that wraps the footer is OUTSIDE #maincore. Reset it. */
+#main > .innerwrapper {
+    display: block !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+#maincoreleft {
+    width: 260px !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+    height: auto !important;
+    left: auto !important;
+}
+#maincorecontent {
+    flex: 1 !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+}
+
+/* On inner pages the left sidebar contains the account menu (My Profile /
+   Preferences / Logout) — but our header already has those in the dropdown,
+   so hide the whole sidebar. We detect "logged in" by checking whether the
+   left login box contains .maitem elements (which only appear when logged in).
+   The body class may or may not contain "is-logged-in" depending on Kayako
+   version — :has() is the reliable detection. */
+#maincoreleft:has(#leftloginbox .maitem) { display: none !important; }
+#maincoreleft:has(#leftloginsubscribebox .maitem) { display: none !important; }
+/* When sidebar is hidden, let content take full width */
+#maincore .innerwrapper:has(#maincoreleft:has(.maitem)) #maincorecontent {
+    width: 100% !important;
+}
+/* Legacy fallback if body class exists */
+body.is-logged-in #leftloginsubscribebox,
+body.is-logged-in #leftlivechatbox { display: none !important; }
+
+/* The big grey "Helpdesk" hero banner with widget icons that shows on
+   Home + Profile/Preferences pages. Keep on home, hide on inner pages
+   (when account menu is in the sidebar, it's an inner page). */
+.uppermainsearch {
+    background-color: var(--bg) !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 32px 24px !important;
+    margin: 0 -24px 24px -24px !important;  /* break out of #maincore padding */
+}
+.helptitle {
+    text-align: center !important;
+    font-size: 28px !important;
+    font-weight: 600 !important;
+    color: var(--text) !important;
+    margin: 0 0 24px 0 !important;
+    letter-spacing: -0.01em !important;
+}
+#corewidgetbox {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.widgetrow {
+    text-align: center !important;
+    margin: 0 !important;
+}
+.widgetrow a, .widgetrow .widgetrowitem {
+    background-color: var(--surface) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow-sm) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    padding: 60px 10px 14px 10px !important;
+    width: 130px !important;
+    margin: 0 8px !important;
+    transition: box-shadow 0.15s, transform 0.15s !important;
+}
+.widgetrow a:hover {
+    box-shadow: var(--shadow) !important;
+    transform: translateY(-1px) !important;
+    color: var(--primary) !important;
+}
+/* Hide hero banner on inner pages (where account menu is in sidebar) */
+#maincore:has(#maincoreleft #leftloginbox .maitem) .uppermainsearch {
+    display: none !important;
+}
+
+/* =========================================================
+   DIALOG MESSAGES CONTAINER — full-width above the flex layout
+   ========================================================= */
+#hd-messages {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 12px 24px 0 24px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+}
+#hd-messages .dialogerror,
+#hd-messages .dialoginfo,
+#hd-messages .dialogalert,
+#hd-messages .dialogsuccess {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 8px 0 !important;
+}
+
+/* === LOGIN PAGE ===
+   After DOM move, #hd-messages is inserted inside #leftloginsubscribebox
+   right after the Login button. Style it to fit within the card. */
+body:not(.is-logged-in) #hd-messages {
+    max-width: 420px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+/* When moved inside the login card, remove outer padding and match card width */
+#leftloginsubscribebox #hd-messages {
+    padding: 0 22px 12px !important;
+    max-width: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+#leftloginsubscribebox #hd-messages .dialogerror,
+#leftloginsubscribebox #hd-messages .dialoginfo {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: var(--radius-sm) !important;
+}
+/* Login page innerwrapper: single column centered */
+body:not(.is-logged-in) #maincore .innerwrapper {
+    flex-direction: column !important;
+    align-items: center !important;
+    max-width: 420px !important;
+    margin: 0 auto !important;
+    padding: 40px 0 40px !important;
+    gap: 0 !important;
+}
+body:not(.is-logged-in) #maincoreleft {
+    width: 100% !important;
+    max-width: 420px !important;
+}
+body:not(.is-logged-in) #maincorecontent {
+    display: none !important;
+}
+
+/* =========================================================
+   LOGIN CARD
+   ========================================================= */
+#leftloginsubscribebox {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow) !important;
+    overflow: hidden !important;
+    margin: 0 0 16px 0 !important;
+    padding: 0 !important;
+}
+.loginbox-header {
+    padding: 22px 24px 18px !important;
+    text-align: center !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+.loginbox-title {
+    margin: 0 !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: var(--text) !important;
+    letter-spacing: -0.01em !important;
+}
+
+#leftloginbox {
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+}
+
+/* clientcss applies background:none !important; padding:20px to .inputframe.zebraeven/.zebraodd.
+   Force OUR padding by being more specific. */
+#leftloginbox .inputframe.zebraeven,
+#leftloginbox .inputframe.zebraodd {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+/* Override clientcss input.loginstyled (177px width, tiny font) */
+#leftloginbox input.loginstyled,
+input.loginstyled {
+    display: block !important;
+    width: 100% !important;
+    height: 52px !important;
+    padding: 0 22px !important;
+    font-size: 14px !important;
+    font-family: var(--font) !important;
+    color: var(--text) !important;
+    background: var(--surface) !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    transition: background 0.15s, border-color 0.15s !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+#leftloginbox input.loginstyled:focus,
+input.loginstyled:focus {
+    outline: none !important;
+    border-bottom-color: var(--primary) !important;
+    box-shadow: 0 1px 0 0 var(--primary) !important;
+    border-color: transparent transparent var(--primary) transparent !important;
+}
+input.loginstyled::placeholder { color: var(--text-muted) !important; opacity: 1 !important; }
+
+/* ----------------------------------------------------------
+   REMEMBER ME
+   Real HTML:
+     <div class="inputframe remembermeDiv">
+       <label class="remembermeLabel" for="leftloginboxrememberme">
+         <input id="leftloginboxrememberme" type="checkbox">
+         <span id="leftloginboxremembermetext">Remember me</span>
+       </label>
+     </div>
+   clientcss has .remembermeDiv { padding: 1px 20px 0px 20px !important }
+   so we just align with that padding-left and use flex.
+   ---------------------------------------------------------- */
+#leftloginbox .inputframe.remembermeDiv,
+.inputframe.remembermeDiv,
+.remembermeDiv {
+    display: flex !important;
+    align-items: center !important;
+    padding: 14px 22px !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+}
+.remembermeLabel,
+label.remembermeLabel {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    font-size: 13px !important;
+    color: var(--text-muted) !important;
+    line-height: 1 !important;
+    font-weight: normal !important;
+    user-select: none !important;
+}
+#leftloginboxrememberme {
+    margin: 0 !important;
+    width: 16px !important; height: 16px !important;
+    accent-color: var(--primary) !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    vertical-align: middle !important;
+    float: none !important;
+}
+#leftloginboxremembermetext {
+    font-size: 13px !important;
+    color: var(--text-muted) !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    vertical-align: middle !important;
+}
+
+.vdivider { display: none !important; }
+
+#logintext {
+    float: none !important;
+    padding: 0 22px 8px !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+    text-align: right !important;
+    max-width: none !important;
+    width: auto !important;
+}
+#logintext a { color: var(--text-muted) !important; text-decoration: none !important; }
+#logintext a:hover { color: var(--primary) !important; }
+
+#loginsubscribebuttons {
+    padding: 4px 22px 22px !important;
+    margin: 0 !important;
+    display: block !important;
+    text-align: center !important;
+}
+#loginsubscribebuttons .rebutton {
+    display: block !important;
+    width: 100% !important;
+    height: 48px !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: var(--primary) !important;
+    background-image: none !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    font-family: var(--font) !important;
+    letter-spacing: 0.01em !important;
+    cursor: pointer !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    max-width: none !important;
+    transition: background-color 0.15s !important;
+}
+#loginsubscribebuttons .rebutton:hover { background-color: var(--primary-hover) !important; }
+#loginsubscribebuttons .rebutton:focus { box-shadow: 0 0 0 3px var(--primary-ring) !important; }
+
+/* =========================================================
+   LEFT SIDEBAR NAV BOXES (filters in My Tickets etc.)
+   ========================================================= */
+.leftnavboxbox {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow-sm) !important;
+    overflow: hidden !important;
+    margin: 0 0 16px 0 !important;
+    padding: 0 !important;
+}
+.leftnavboxtitle {
+    background: var(--bg) !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 11px 16px !important;
+}
+.leftnavboxtitletext {
+    padding: 0 !important;
+    font-size: 11px !important; font-weight: 600 !important;
+    text-transform: uppercase !important; letter-spacing: 0.06em !important;
+    color: var(--text-muted) !important;
+    line-height: 1.2 !important;
+}
+.leftnavboxcontent { padding: 4px 0 !important; margin: 0 !important; }
+.leftnavboxcontent a {
+    display: flex !important; align-items: center !important; justify-content: space-between !important;
+    padding: 10px 16px !important; font-size: 14px !important;
+    color: var(--text) !important; text-decoration: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    transition: background 0.12s, color 0.12s !important;
+}
+.leftnavboxcontent a:hover { background: var(--bg) !important; color: var(--primary) !important; }
+.leftnavboxcontent .graytext {
+    font-size: 12px !important; color: var(--text-muted) !important;
+    background: var(--bg) !important; padding: 2px 8px !important;
+    border-radius: 10px !important; margin: 0 0 0 8px !important;
+    float: none !important;
+    line-height: 1.5 !important;
+}
+
+/* =========================================================
+   BUTTONS — primary blue, overriding the Kayako teal gradient
+   The .rebuttonwide2 is used everywhere: Submit/Next, Save Changes, etc.
+   ========================================================= */
+.rebutton, .rebuttonblue, .rebuttonwide2,
+.searchbutton, .headerbutton,
+input.button, button.button {
+    background-color: var(--primary) !important;
+    background-image: none !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    color: #fff !important;
+    font-weight: 500 !important;
+    font-family: var(--font) !important;
+    font-size: 14px !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.15s !important;
+    padding: 9px 18px !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+}
+.rebutton:hover, .rebuttonblue:hover, .rebuttonwide2:hover,
+.searchbutton:hover, .headerbutton:hover,
+input.button:hover, button.button:hover {
+    background-color: var(--primary-hover) !important;
+    color: #fff !important;
+}
+.rebuttonred {
+    background-color: var(--danger) !important;
+    color: #fff !important;
+    border: none !important;
+}
+.rebuttonred:hover { background-color: var(--danger-strong) !important; }
+
+/* Header button (e.g. "Hide Resolved Tickets") — keep primary blue */
+.headerbutton {
+    float: none !important;
+    display: inline-block !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+}
+
+/* =========================================================
+   TICKET VIEW — Properties bar (the dark strip with DEPARTMENT/OWNER/...)
+   Real HTML structure:
+     <div class="ticketgeneralproperties" style="background-color: [statusbgcolor]">
+       <div class="ticketgeneralpropertiesobject">      ← float:left width:20% from clientcss
+         <div class="ticketgeneralpropertiestitle">DEPARTMENT</div>
+         <div class="ticketgeneralpropertiescontent">Local Admins</div>
+       </div>
+       <div class="ticketgeneralpropertiesdivider">...</div>   (already display:none)
+       ... (5 columns total)
+       <div class="ticketgeneralpropertiesobject" style="background-color: [prioritybgcolor]">
+         <div class="ticketgeneralpropertiestitle">PRIORITY</div>
+         <div class="ticketgeneralpropertiesselect">
+           <select class="swiftselect">...</select>      ← needs to be vertically centered
+         </div>
+       </div>
+     </div>
+   Clientcss applies:
+     .ticketgeneralpropertiesobject { padding:12px; float:left; width:20% !important; min-height:63px }
+     .ticketgeneralcontainer .swiftselect { height:24px; padding:0px 2px 0px 6px!important; line-height:1; margin-top:4px }
+   So the select text sits at the top, and floats can drop into the gutter on
+   long content. We use flex (overrides float via display) + table-layout
+   trickery: rather than fight floats, switch the parent to flex (display:flex
+   wins over float on children when applied to the parent).
+   ========================================================= */
+.ticketgeneralcontainer {
+    background: var(--bg) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    padding: 0 !important;
+    margin: 0 0 0 0 !important;    /* no bottom margin — viewticketcontentcontainer has its own padding */
+    overflow: hidden !important;
+}
+.ticketgeneraltitlecontainer {
+    padding: 18px 20px 10px !important;
+    background: var(--surface) !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+.ticketgeneraltitle {
+    color: var(--text) !important;
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    letter-spacing: -0.01em !important;
+}
+.ticketgeneralinfocontainer {
+    padding: 6px 20px 14px !important;
+    background: var(--surface) !important;
+    font-size: 13px !important;
+    color: var(--text-muted) !important;
+}
+
+/* The dark properties strip itself */
+.ticketgeneralproperties {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border-top: 1px solid rgba(255,255,255,0.06) !important;
+    width: 100% !important;
+}
+
+/* Each property cell — override float:left + width:20% from clientcss */
+.ticketgeneralproperties .ticketgeneralpropertiesobject,
+.ticketgeneralproperties .ticketgeneralpropertiesobjectwide,
+.ticketgeneralproperties .ticketgeneralpropertiesobjectmed {
+    flex: 1 1 20% !important;
+    float: none !important;
+    width: 20% !important;
+    min-width: 0 !important;
+    max-width: 20% !important;
+    padding: 14px 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    min-height: 70px !important;
+    border-right: 1px solid rgba(255,255,255,0.18) !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+.ticketgeneralproperties .ticketgeneralpropertiesobject:last-child {
+    border-right: none !important;
+}
+
+.ticketgeneralproperties .ticketgeneralpropertiestitle {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.07em !important;
+    color: rgba(255,255,255,0.7) !important;
+    margin: 0 0 6px 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.ticketgeneralproperties .ticketgeneralpropertiescontent {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.ticketgeneralproperties .ticketgeneralpropertiesselect {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+}
+
+/* Status / Priority <select>. Clientcss has:
+   .ticketgeneralcontainer .swiftselect { height:24px; padding:0px 2px 0px 6px!important;
+                                          margin-top:4px; line-height:1 }
+   Result: tiny dropdown with text floating near the top — exactly what we saw.
+   Replace with a properly sized one. */
+.ticketgeneralproperties .ticketgeneralpropertiesselect .swiftselect,
+.ticketgeneralproperties select.swiftselect,
+.ticketgeneralcontainer .ticketgeneralpropertiesselect .swiftselect,
+.ticketgeneralcontainer .swiftselect {
+    height: 34px !important;
+    min-height: 34px !important;
+    line-height: normal !important;
+    padding: 0 28px 0 10px !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    background-color: rgba(255,255,255,0.18) !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 12 8'><path fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5 11 1.5'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 10px center !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    border-radius: var(--radius-sm) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    transition: background-color 0.15s !important;
+}
+.ticketgeneralproperties .swiftselect:hover {
+    background-color: rgba(255,255,255,0.28) !important;
+    color: #fff !important;
+}
+.ticketgeneralproperties .swiftselect option,
+.ticketgeneralcontainer .swiftselect option {
+    color: var(--text) !important;
+    background: #fff !important;
+    font-weight: 500 !important;
+}
+
+.ticketgeneralpropertiesdivider { display: none !important; }
+
+/* ----------------------------------------------------------
+   CANCEL / SAVE CHANGES
+   Container is display:none by default (clientcss).
+   JS calls .show()/.hide() — we do NOT touch display here.
+   ---------------------------------------------------------- */
+#saveticketpropertiesbuttoncontainer {
+    float: none !important;
+    margin: 0 !important;
+    padding: 8px 20px 4px !important;
+    text-align: right !important;
+    gap: 10px !important;
+    display: none;  /* clientcss sets this; we don't override display */
+}
+
+#cancelticketpropertiesbutton,
+span#cancelticketpropertiesbutton.rebuttonwide2,
+span#cancelticketpropertiesbutton.rebuttonwide2.rebuttonwide2final {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 38px !important;
+    padding: 0 18px !important;
+    background-color: var(--surface) !important;
+    background-image: none !important;
+    color: var(--text) !important;
+    border: 1px solid var(--border-strong) !important;
+    border-radius: var(--radius-sm) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    font-family: var(--font) !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    transition: background-color 0.15s, border-color 0.15s !important;
+}
+#cancelticketpropertiesbutton:hover {
+    background-color: var(--bg) !important;
+    border-color: var(--text-muted) !important;
+    color: var(--text) !important;
+}
+
+#saveticketpropertiesbutton,
+span#saveticketpropertiesbutton.rebuttonwide2,
+span#saveticketpropertiesbutton.rebuttonwide2.rebuttonwide2final {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 38px !important;
+    padding: 0 18px !important;
+    background-color: var(--primary) !important;
+    background-image: none !important;
+    color: #fff !important;
+    border: 1px solid var(--primary) !important;
+    border-radius: var(--radius-sm) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    font-family: var(--font) !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    transition: background-color 0.15s !important;
+}
+#saveticketpropertiesbutton:hover {
+    background-color: var(--primary-hover) !important;
+    border-color: var(--primary-hover) !important;
+    color: #fff !important;
+}
+
+/* =========================================================
+   DIALOG MESSAGES — the heart of the "white i icon" problem
+   Real HTML:
+     <div class="dialogerror">
+       <div class="dialogerrorsub">
+         <div class="dialogerrorcontent">Invalid data provided: 2</div>
+       </div>
+     </div>
+   Clientcss applies to .dialogerrorcontent:
+       background-color: #e05720;  (orange)
+       color: #ffffff;
+       padding: 5px 30px 5px 30px;
+       margin: 54px 0 0 0px;
+       display: inline-block;
+       border-radius: 3px;
+   PLUS .dialogerrorcontent::before { font-family:'FontAwesome'; content:"\f1ce" }
+   (\f1ce is "exclamation-circle" but rendered as a white circle = the "i").
+
+   FIX: target .dialogerrorcontent directly, kill the ::before icon,
+   replace the background with our own SVG icon, expand to full width.
+   ========================================================= */
+.dialogerror, .dialoginfo, .dialogsuccess, .dialogalert {
+    margin: 0 0 16px 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
+}
+.dialogerrorsub, .dialoginfosub, .dialogsuccesssub {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    display: block !important;
+}
+
+/* ----- ERROR (red) ----- */
+/* Exclude #customfieldchangednotice and #customfieldrequirednotice —
+   they are hidden by clientcss and shown by JS only when needed.
+   display:block here would override their display:none. */
+.dialogerrorcontent:not(#customfieldchangednotice):not(#customfieldrequirednotice) {
+    display: block !important;
+    width: 100% !important;
+    padding: 13px 16px 13px 46px !important;
+    margin: 0 0 16px 0 !important;
+    background-color: var(--danger-bg) !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23dc2626' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><line x1='12' y1='8' x2='12' y2='12'/><circle cx='12' cy='16' r='0.6' fill='%23dc2626' stroke='none'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: 16px center !important;
+    background-size: 20px 20px !important;
+    border: 1px solid var(--danger-border) !important;
+    border-left: 4px solid var(--danger) !important;
+    border-radius: var(--radius) !important;
+    color: var(--danger-strong) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+    box-sizing: border-box !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+.dialogerrorcontent::before {
+    content: "" !important;
+    display: none !important;
+    font-size: 0 !important;
+}
+
+/* ----- INFO (blue) ----- */
+.dialoginfocontent {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 13px 16px 13px 46px !important;
+    margin: 0 !important;
+    background-color: var(--primary-light) !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><line x1='12' y1='16' x2='12' y2='11'/><circle cx='12' cy='8' r='0.6' fill='%232563eb' stroke='none'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: 16px center !important;
+    background-size: 20px 20px !important;
+    border: 1px solid #bfdbfe !important;
+    border-left: 4px solid var(--primary) !important;
+    border-radius: var(--radius) !important;
+    color: var(--primary-hover) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+    box-sizing: border-box !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+.dialoginfocontent::before {
+    content: "" !important;
+    display: none !important;
+    font-family: inherit !important;
+    font-size: 0 !important;
+}
+
+/* Alert variants (the .alert class is also styled in clientcss) */
+.alert {
+    background: transparent !important;
+    color: inherit !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 0 16px 0 !important;
+}
+.alert::before { display: none !important; content: "" !important; font-size: 0 !important; }
+
+/* ----- "Required field missing" and "Changed" inline notices (viewticket) -----
+   These have class="dialogerrorcontent" but are hidden by default via clientcss.
+   Kayako JS shows/hides them. Full styling is at the bottom of this file.
+   Only override margin here to position them correctly inside the form. */
+#customfieldrequirednotice {
+    margin: 10px 10px 0 10px !important;
+}
+#customfieldchangednotice {
+    margin: 10px 10px 0 10px !important;
+}
+
+/* =========================================================
+   REQUIRED FIELD HIGHLIGHT
+   Kayako uses .swifttexterror class on inputs when validation fails.
+   Also applied to container divs/tds for radio/checkbox groups.
+   ========================================================= */
+input.swifttexterror,
+textarea.swifttexterror,
+select.swifttexterror {
+    border: 2px solid var(--danger) !important;
+    background-color: var(--danger-bg) !important;
+    box-shadow: 0 0 0 3px var(--danger-ring) !important;
+    color: var(--danger-strong) !important;
+    outline: none !important;
+}
+/* Radio/checkbox groups — Kayako wraps the td in swifttexterror */
+td.swifttexterror,
+div.swifttexterror,
+.swifttexterror {
+    background-color: var(--danger-bg) !important;
+    border: 1px solid var(--danger-border) !important;
+    border-radius: var(--radius-sm) !important;
+    box-shadow: 0 0 0 2px var(--danger-ring) !important;
+    padding: 4px 6px !important;
+    color: var(--danger-strong) !important;
+}
+/* Override so that input/textarea/select specificity stays higher */
+input.swifttexterror,
+textarea.swifttexterror,
+select.swifttexterror {
+    border: 2px solid var(--danger) !important;
+    box-shadow: 0 0 0 3px var(--danger-ring) !important;
+}
+
+label.error {
+    background: transparent !important;
+    border: none !important;
+    color: var(--danger-strong) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    margin-top: 4px !important;
+    padding: 0 !important;
+    display: block !important;
+}
+/* .error as block element (clientcss uses red bg) — reset */
+.error {
+    background-color: transparent !important;
+    border: none !important;
+    color: var(--danger-strong) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* "Required" red asterisk on form labels */
+.required, .requiredfield {
+    color: var(--danger) !important;
+    font-weight: 700 !important;
+}
+
+/* =========================================================
+   CONTENT BOXES (boxcontainer is the main page wrapper)
+   Clientcss applies massive paddings and font sizes; tighten.
+   ========================================================= */
+.boxcontainer {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 0 16px 0 !important;
+    border: none !important;
+}
+.boxcontainerlabel {
+    text-transform: none !important;
+    color: var(--text) !important;
+    padding: 0 0 16px 0 !important;
+    margin: 0 0 20px 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.01em !important;
+}
+.boxcontainercontent {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow-sm) !important;
+    padding: 16px 24px 24px !important;
+    margin: 0 !important;
+    word-break: break-word !important;
+}
+/* Sections inside .boxcontainercontent — e.g. "General Information", "Subject: TEST" */
+.boxcontainercontent table td,
+.boxcontainercontent table th {
+    padding: 8px 12px !important;
+    border-bottom: 1px solid var(--border) !important;
+    vertical-align: top !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+}
+.boxcontainercontent table td:first-child {
+    color: var(--text-muted) !important;
+    white-space: nowrap !important;
+    width: 180px !important;
+}
+.boxcontainercontent .hlineheader th {
+    padding: 16px 0 8px 0 !important;
+    border-bottom: none !important;
+}
+/* Message body area inside ticket submission confirm */
+.boxcontainercontent .ticketcontentsmessage,
+.boxcontainercontent .ticketpostcontentsdetailscontainer {
+    padding: 16px !important;
+    background: var(--bg) !important;
+    border-radius: var(--radius-sm) !important;
+    border: 1px solid var(--border) !important;
+    min-height: 60px !important;
+    margin-top: 8px !important;
+}
+
+.boxcontainercontenttight {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow-sm) !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+/* Add Reply button and posts live inside boxcontainercontenttight without padding */
+#addreplybutton {
+    padding: 0 20px !important;
+    margin: 12px 0 !important;
+}
+.ticketpostsholder {
+    padding: 0 20px 20px !important;
+}
+
+/* =========================================================
+   SUPPRESS EXCESSIVE <br> TAGS BEFORE SECTION HEADERS
+   ========================================================= */
+.boxcontainercontent br,
+.boxcontainercontenttight br,
+#maincorecontent form br,
+#maincorecontent .form-table br {
+    display: none !important;
+}
+.ticketpostcontentsdetailscontainer br,
+.infotextcontainer br {
+    display: inline !important;
+}
+
+/* =========================================================
+   REMOVE SPACING BETWEEN FORM SECTIONS
+   Kayako wraps some tables in <div class="form-table">.
+   These divs + bare tables between hlineheaders create gaps.
+   ========================================================= */
+.boxcontainercontent .form-table,
+.boxcontainercontent > div.form-table {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+/* Tables directly inside boxcontainercontent — no bottom margin */
+.boxcontainercontent > table,
+.boxcontainercontent .form-table > table,
+.boxcontainercontent > .form-table table {
+    margin-bottom: 0 !important;
+}
+
+/* =========================================================
+   ADD REPLY form
+   ========================================================= */
+.ticketpaddingcontainer {
+    padding: 0 16px 16px !important;
+}
+.ticketpaddingcontainer table.hlineheader {
+    margin: 0 0 8px 0 !important;
+}
+.ticketpaddingcontainer .subcontent {
+    margin-top: 12px !important;
+    display: flex !important;
+    gap: 8px !important;
+    align-items: center !important;
+}
+#postreplycontainer {
+    margin: 0 16px 16px !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    overflow: hidden !important;
+}
+/* No top spacing before the first section header in reply form */
+#postreplycontainer .ticketpaddingcontainer > table.hlineheader:first-child,
+#postreplycontainer table.hlineheader:first-of-type {
+    margin-top: 0 !important;
+}
+
+/* Submit ticket form — reduce space between Attach Files and Submit button */
+.boxcontainercontent .subcontent {
+    margin-top: 8px !important;
+    padding-top: 0 !important;
+}
+#ticketattachmentcontainer {
+    min-height: 8px !important;
+    padding: 4px 0 0 !important;
+}
+
+/* Section headers with horizontal line (e.g. "CONTACTS", "GENERAL INFORMATION") */
+table.hlineheader {
+    margin: 4px 0 8px 0 !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+}
+.boxcontainercontent > table.hlineheader:first-of-type,
+.boxcontainercontent table.hlineheader:first-child,
+.viewticketcontentcontainer table.hlineheader:first-child,
+.ticketpaddingcontainer table.hlineheader:first-child,
+.form-table > table.hlineheader:first-child {
+    margin-top: 0 !important;
+}
+table.hlineheader th {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    color: var(--text-muted) !important;
+    padding: 0 12px 0 0 !important;
+    white-space: nowrap !important;
+    vertical-align: bottom !important;
+    width: 1px !important;
+    border: none !important;
+}
+table.hlineheader td {
+    padding: 0 !important;
+    border: none !important;
+}
+td.hlinelower {
+    border-top: 1px solid var(--border) !important;
+    height: 1px !important;
+    padding: 0 !important;
+}
+table.hlineheader tr:first-child td {
+    border: none !important;
+    padding-bottom: 4px !important;
+}
+
+/* =========================================================
+   TICKET LIST TABLE (My Tickets)
+   ========================================================= */
+.ticketlistheaderrow {
+    background: var(--bg) !important;
+    padding: 12px 14px !important;
+    text-align: left !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: var(--text-muted) !important;
+    border-bottom: 1px solid var(--border) !important;
+    vertical-align: middle !important;
+}
+.ticketlistheaderrow a { color: var(--text-muted) !important; }
+.ticketlistheaderrow a:hover { color: var(--text) !important; }
+
+.ticketsubjectrow td.ticketlistsubject {
+    padding: 14px 14px 4px 14px !important;
+    border-bottom: none !important;
+}
+.ticketlistsubject a {
+    color: var(--text) !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    padding: 0 !important;
+    border-bottom: none !important;
+    display: block !important;
+}
+.ticketlistsubject a:hover { color: var(--primary) !important; }
+
+.ticketlistproperties .ticketlistpropertiescontainer {
+    padding: 4px 14px 14px 14px !important;
+    border-bottom: 1px solid var(--border) !important;
+    font-size: 13px !important;
+    color: var(--text-muted) !important;
+    vertical-align: middle !important;
+}
+
+.ticketsubjectrow:hover,
+.ticketsubjectrow:hover + tr.ticketlistproperties { background-color: var(--bg) !important; }
+
+.ticketlistpropertiesdivider { display: none !important; }
+
+/* Status / Priority badges in the list */
+.ticketStatusIndicator {
+    display: inline-block !important;
+    padding: 3px 10px !important;
+    border-radius: 999px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    height: auto !important;
+    min-width: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+}
+
+/* Pagination */
+.paginationcontainer {
+    float: none !important;
+    text-align: right !important;
+    padding: 12px 4px !important;
+}
+.gridhighlightpage {
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+    color: var(--text-muted) !important;
+}
+
+/* =========================================================
+   FORMS — submit ticket form, etc.
+   ========================================================= */
+input.swifttext, input.swifttextlarge, input.swifttextwide,
+textarea.swifttextarea, textarea.swifttextareawide {
+    border-radius: var(--radius-sm) !important;
+    border: 1px solid var(--border) !important;
+    background: var(--surface) !important;
+    color: var(--text) !important;
+    font-family: var(--font) !important;
+    font-size: 14px !important;
+    padding: 10px 12px !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.15s, box-shadow 0.15s !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    max-width: 480px !important;
+}
+/* Error state must come AFTER the base rule to win the cascade */
+input.swifttext.swifttexterror,
+input.swifttextlarge.swifttexterror,
+input.swifttextwide.swifttexterror,
+textarea.swifttextarea.swifttexterror,
+textarea.swifttextareawide.swifttexterror,
+input.swifttexterror,
+textarea.swifttexterror,
+select.swifttexterror {
+    border: 2px solid var(--danger) !important;
+    background-color: var(--danger-bg) !important;
+    box-shadow: 0 0 0 3px var(--danger-ring) !important;
+    -webkit-box-shadow: 0 0 0 3px var(--danger-ring) !important;
+    color: var(--danger-strong) !important;
+    outline: none !important;
+}
+textarea.swifttextarea, textarea.swifttextareawide {
+    max-width: 100% !important;
+    min-height: 140px !important;
+    resize: vertical !important;
+}
+input.swifttext:focus, input.swifttextlarge:focus, input.swifttextwide:focus,
+textarea.swifttextarea:focus, textarea.swifttextareawide:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px var(--primary-ring) !important;
+    outline: 0 !important;
+}
+
+/* Generic selects (NOT the .ticketgeneralcontainer ones, which we handled) */
+select.swiftselect {
+    border-radius: var(--radius-sm) !important;
+    border: 1px solid var(--border) !important;
+    background-color: var(--surface) !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5 11 1.5'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    color: var(--text) !important;
+    font-family: var(--font) !important;
+    font-size: 14px !important;
+    padding: 8px 36px 8px 12px !important;
+    height: 38px !important;
+    line-height: 1.4 !important;
+    box-shadow: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    transition: border-color 0.15s, box-shadow 0.15s !important;
+}
+select.swiftselect:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px var(--primary-ring) !important;
+    outline: 0 !important;
+}
+
+/* Multi-select (e.g. Location field) — remove fixed height, show all options */
+select.swiftselect[multiple] {
+    height: auto !important;
+    min-height: 120px !important;
+    background-image: none !important;
+    padding: 4px 8px !important;
+    appearance: auto !important;
+    -webkit-appearance: auto !important;
+    -moz-appearance: auto !important;
+    overflow-y: auto !important;
+}
+select.swiftselect[multiple] option {
+    padding: 6px 8px !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+/* Error state for multiple select — must come after base rule */
+select.swiftselect[multiple].swifttexterror {
+    border: 2px solid var(--danger) !important;
+    background-color: var(--danger-bg) !important;
+    box-shadow: 0 0 0 3px var(--danger-ring) !important;
+    outline: none !important;
+}
+
+/* Radio buttons in submit ticket form */
+input[type="radio"], input[type="checkbox"] {
+    accent-color: var(--primary) !important;
+    cursor: pointer !important;
+    vertical-align: middle !important;
+}
+
+/* Form rows in submit ticket, profile, view ticket */
+form .zebraodd, form .zebraeven {
+    background: transparent !important;
+    color: var(--text) !important;
+    font-weight: normal !important;
+    line-height: 1.5 !important;
+}
+form table td {
+    padding: 8px 6px !important;
+    border-bottom: none !important;    /* kill the lines between rows */
+    vertical-align: middle !important;
+}
+form table td:first-child {
+    width: auto !important;            /* don't force 180px — let it be natural */
+    color: var(--text-muted) !important;
+    font-size: 13px !important;
+    white-space: normal !important;
+    padding-right: 16px !important;
+}
+/* hlineheader inside forms — section title rows */
+form table.hlineheader td,
+form table.hlineheader th {
+    border-bottom: none !important;
+    padding: 12px 0 4px 0 !important;
+    background: transparent !important;
+}
+/* viewticketcontentcontainer — the form area with custom fields */
+.viewticketcontentcontainer {
+    padding: 4px 20px 16px !important;
+}
+.viewticketcontentcontainer table {
+    width: 100% !important;
+}
+.viewticketcontentcontainer table td {
+    padding: 8px 6px !important;
+    border-bottom: 1px solid var(--border) !important;
+    vertical-align: top !important;
+}
+.viewticketcontentcontainer table tr:last-child td {
+    border-bottom: none !important;
+}
+.viewticketcontentcontainer table td:first-child {
+    width: 220px !important;
+    min-width: 160px !important;
+    color: var(--text-muted) !important;
+    font-size: 13px !important;
+    padding-right: 16px !important;
+    vertical-align: top !important;
+    padding-top: 10px !important;
+}
+.viewticketcontentcontainer .smalltext {
+    font-size: 12px !important;
+    color: var(--text-muted) !important;
+    margin-top: 2px !important;
+    font-weight: normal !important;
+}
+/* Required field indicator */
+.customfieldrequired {
+    color: var(--danger) !important;
+    font-weight: 700 !important;
+    margin-left: 2px !important;
+}
+
+/* =========================================================
+   FOOTER — "Help Desk Software by Kayako"
+   ========================================================= */
+#bottomfooter, .bottomfooterpadding {
+    display: block !important;
+    text-align: center !important;
+    padding: 10px 24px !important;
+    margin: 0 !important;
+    border-top: 1px solid var(--border) !important;
+    background: transparent !important;
+    font-size: 12px !important;
+    color: var(--text-muted) !important;
+    line-height: 1.4 !important;
+    clear: both !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+/* Footer wrapper innerwrapper — must be full width regardless of page */
+#main > .innerwrapper:last-of-type,
+#main > .innerwrapper:last-child {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-direction: unset !important;
+    align-items: unset !important;
+}
+#bottomfooter a, .bottomfooterpadding a {
+    color: var(--text-muted) !important;
+    text-decoration: none !important;
+}
+#bottomfooter a:hover, .bottomfooterpadding a:hover { color: var(--primary) !important; }
+
+/* =========================================================
+   PROFILE / PREFERENCES form layout
+   ========================================================= */
+/* Constrain input width on Profile/Prefs pages — they use .boxcontainercontent */
+.boxcontainercontent input.swifttextlarge,
+.boxcontainercontent input.swifttextwide,
+.boxcontainercontent input.swifttext {
+    max-width: 380px !important;
+}
+/* Avatar cell in Profile */
+.boxcontainercontent td.avatar {
+    width: 120px !important;
+    padding: 8px 16px 8px 0 !important;
+    vertical-align: top !important;
+}
+.boxcontainercontent td.avatar img {
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: var(--radius) !important;
+    object-fit: cover !important;
+    border: 1px solid var(--border) !important;
+}
+.boxcontainercontent .useremailitem {
+    padding: 6px 0 !important;
+    font-size: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+/* =========================================================
+   SUBMIT TICKET / ATTACH FILES section
+   ========================================================= */
+/* Attach file container — give it reasonable min height */
+#ticketattachmentcontainer {
+    min-height: 20px !important;
+    padding: 8px 0 !important;
+}
+.ticketattachmentitem {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 6px 0 !important;
+}
+/* File input within attachment item */
+.ticketattachmentitem input[type="file"] {
+    flex: 1 !important;
+    max-width: 500px !important;
+    padding: 6px 8px !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    background: var(--surface) !important;
+    font-size: 13px !important;
+}
+/* The empty hlineheader before textarea (Your Message section) — 
+   it has no text in th, only produces a spurious line.
+   Target it by checking for empty th. */
+table.hlineheader th:empty + td {
+    display: none !important;
+}
+/* Better: target the specific empty table before textarea */
+.form-table table.hlineheader:first-child {
+    display: none !important;
+}
+/* Subject and Body field — remove extra spacing */
+.form-table table tr td input.swifttextwide {
+    margin-bottom: 0 !important;
+}
+
+/* =========================================================
+   TICKET POSTS — full width, not clipped
+   Real HTML structure:
+     <div class="ticketpostcontainer">
+       <div class="ticketpostbar">
+         <div class="ticketpostavatar"><div class="tpavatar"><img .../></div></div>
+       </div>
+       <div class="ticketpostcontents">
+         <div class="ticketpostcontentsbar">...</div>
+         <div class="ticketpostcontentsdetails">...</div>
+       </div>
+     </div>
+   ========================================================= */
+.ticketpostcontainer {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow-sm) !important;
+    margin: 0 0 12px 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: stretch !important;
+    overflow: hidden !important;
+}
+.ticketpostcontainer:hover { background: var(--surface) !important; }
+
+/* Avatar column */
+.ticketpostbar {
+    flex-shrink: 0 !important;
+    width: 64px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: 16px 0 16px 16px !important;
+    float: none !important;
+}
+.ticketpostavatar {
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.tpavatar {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    background: var(--bg) !important;
+    border: 1px solid var(--border) !important;
+    flex-shrink: 0 !important;
+}
+.tpavatar img {
+    width: 42px !important;
+    height: 42px !important;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: 50% !important;
+}
+
+/* Content column */
+.ticketpostcontents {
+    flex: 1 !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    float: none !important;
+}
+
+.ticketpostcontentsbar {
+    background: var(--bg) !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 12px 18px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+.ticketpostbarname {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--text) !important;
+    display: inline !important;
+}
+.ticketpostbardesignation {
+    font-size: 12px !important;
+    color: var(--text-muted) !important;
+}
+.ticketpostcontentsdetails {
+    padding: 0 !important;
+}
+.ticketpostcontentsholder {
+    padding: 0 !important;
+}
+.ticketpostcontentsdetailscontainer {
+    padding: 14px 18px !important;
+    color: var(--text) !important;
+    line-height: 1.6 !important;
+    font-size: 14px !important;
+}
+.ticketpostclearer {
+    clear: both !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 900px) {
+    #maincore .innerwrapper { flex-direction: column !important; }
+    #maincoreleft { width: 100% !important; }
+    .ticketgeneralproperties { flex-wrap: wrap !important; }
+    .ticketgeneralproperties .ticketgeneralpropertiesobject {
+        flex: 1 1 33% !important;
+        min-width: 33% !important;
+    }
+}
+@media (max-width: 600px) {
+    #topbanner .hd-inner { padding: 0 16px !important; }
+    .hd-brand-name { font-size: 15px !important; }
+    .hd-logo, .hd-brand-name { height: 28px !important; }
+    .hd-nav { gap: 2px !important; }
+    .hd-nav-link { padding: 0 10px !important; font-size: 13px !important; }
+    .hd-account-btn .hd-account-label { display: none !important; }
+    .hd-account-btn { padding: 0 10px !important; }
+    #maincore { padding: 0 16px !important; }
+    #maincore .innerwrapper { padding: 16px 0 !important; }
+    .ticketgeneralproperties .ticketgeneralpropertiesobject {
+        flex: 1 1 50% !important;
+        min-width: 50% !important;
+    }
+}
+/* #customfieldrequirednotice and #customfieldchangednotice are hidden by
+   Kayako's JS by default and shown only when needed. Do NOT force display:block.
+   Just style them when they ARE visible (JS sets inline style="display:block"). */
+#customfieldrequirednotice,
+#customfieldchangednotice {
+    padding: 13px 16px 13px 46px !important;
+    background-repeat: no-repeat !important;
+    background-position: 16px center !important;
+    background-size: 20px 20px !important;
+    margin: 10px 0 16px 0 !important;
+    border-radius: var(--radius-sm) !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+#customfieldrequirednotice {
+    background-color: var(--danger-bg) !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23dc2626' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><line x1='12' y1='8' x2='12' y2='12'/><circle cx='12' cy='16' r='0.6' fill='%23dc2626' stroke='none'/></svg>") !important;
+    border: 1px solid var(--danger-border) !important;
+    border-left: 4px solid var(--danger) !important;
+    color: var(--danger-strong) !important;
+}
+#customfieldchangednotice {
+    background-color: var(--primary-light) !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><line x1='12' y1='16' x2='12' y2='11'/><circle cx='12' cy='8' r='0.6' fill='%232563eb' stroke='none'/></svg>") !important;
+    border: 1px solid #bfdbfe !important;
+    border-left: 4px solid var(--primary) !important;
+    color: var(--primary-hover) !important;
+}

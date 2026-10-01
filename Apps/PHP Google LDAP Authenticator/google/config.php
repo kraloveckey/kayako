@@ -56,7 +56,9 @@ define('KAYAKO_LDAP_ERROR_USERGROUP', true);
 define('KAYAKO_LDAP_VERIFY_CONTROLLER', true);
 
 define('KAYAKO_LDAP_TEST', false);
-define('KAYAKO_LDAP_SHOW_ERRORS', true);
+// Show PHP fatal/parse errors in the HTTP response. Keep false in production:
+// warnings and notices are always written to log/log.txt by ldap_error_handler().
+define('KAYAKO_LDAP_SHOW_ERRORS', false);
 define('KAYAKO_LDAP_LOG', true);
 define('KAYAKO_LDAP_LOG_XML', false);
 define('KAYAKO_LDAP_LOG_OUTPUT', false);
@@ -97,9 +99,21 @@ $use_tls = false;
 $ad_port = 389;
 
 $adldap_options = array(
+    // Service account: googleLDAP re-binds with it after checking the user's
+    // password, so that user info and group lookups have read rights.
     'admin_user_name' => $admin_user_name,
     'admin_password'  => $admin_password,
     'use_ssl'         => $use_ssl,
     'use_tls'         => $use_tls,
     'ad_port'         => $ad_port,
+
+    /**
+     * Optional: groups checked against a pre-built membership file instead of LDAP
+     * (deep nesting). Key - full group DN as used in $staff_groups / $user_groups,
+     * value - absolute path to a file with one email per line.
+     * If a group is listed here, the file is authoritative: a missing file = no access.
+     */
+    'nested_group_files' => array(
+        // 'cn=helpdesk.admins,ou=Groups,dc=dns,dc=com' => '/etc/stunnel/nested_helpdesk.admins.txt',
+    ),
 );

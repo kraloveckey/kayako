@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kayako Dual-Provider LDAP — Staff Test</title>
+    <style>
+        body { font-family: sans-serif; max-width: 500px; margin: 40px auto; }
+        fieldset { margin-bottom: 20px; padding: 16px; }
+        label { display: block; margin-bottom: 4px; font-size: 0.9em; color: #555; }
+        input[type=text], input[type=password] { width: 100%; box-sizing: border-box; padding: 6px; margin-bottom: 12px; }
+        small { color: #888; }
+    </style>
+</head>
+<body>
+<h2>Kayako Dual-Provider LDAP — Staff Test</h2>
+<p><small>Author: kraloveckey | Version: 2.0.0</small></p>
+<hr />
+
+<fieldset>
+    <legend>Google Workspace login</legend>
+    <form action="google-ad-auth.php?type=staff&test=staff" method="post">
+        <label>Email (user@google-domain.com):</label>
+        <input type="text" name="username" placeholder="user@google-domain.com" />
+        <label>Google password:</label>
+        <input type="password" name="password" />
+        <input type="submit" value="Test Staff Login (Google)" />
+    </form>
+</fieldset>
+
+<fieldset>
+    <legend>Active Directory login</legend>
+    <form action="google-ad-auth.php?type=staff&test=staff" method="post">
+        <label>sAMAccountName (without @domain):</label>
+        <input type="text" name="username" placeholder="jdoe" />
+        <label>AD (domain) password:</label>
+        <input type="password" name="password" />
+        <input type="submit" value="Test Staff Login (AD)" />
+    </form>
+</fieldset>
+</body>
+</html>

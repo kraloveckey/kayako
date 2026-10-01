@@ -121,7 +121,7 @@ fi
 if [ -s "${EMAIL}" ];
 then
    swaks -f ${MAIL_FROM} -t ${MAIL_TO} -s ${MAIL_SMTP} --auth-user=${MAIL_AUTH} --auth-password=${MAIL_PASS} -tls -p ${MAIL_PORT} --body ${EMAIL} \
-   --header "Subject: xDesk Users Report" --add-header "Content-Type: text/plain; charset=UTF-8" --h-From: '"xDesk Server" <'${MAIL_FROM}'>'
+   --header "Subject: Helpdesk Users Report" --add-header "Content-Type: text/plain; charset=UTF-8" --h-From: '"Helpdesk Server" <'${MAIL_FROM}'>'
    rm -r "${USERS}" "${EMAIL}"
 else
    echo -e "Email list is empty letter will not be send!!!"

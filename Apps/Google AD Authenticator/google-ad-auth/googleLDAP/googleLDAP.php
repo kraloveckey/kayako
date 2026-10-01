@@ -3,12 +3,7 @@
  * Core Google LDAP Library for Kayako
  * Simple replacement for adLDAP focused on Google Secure LDAP via stunnel
  *
- * Backported from Google AD Authenticator (googleLDAP 2.3.2):
- *   - service account rebind after the user bind
- *   - one level of nested groups + optional pre-built membership files
- *   - user filter values are escaped with ldap_escape()
- *
- * @version 1.1.0
+ * @version 2.3.3
  * @author kraloveckey
  */
 
@@ -33,14 +28,13 @@ class googleLDAP {
         $port = $this->_options['ad_port'];
 
         $this->_conn = ldap_connect($dc, $port);
+        ldap_set_option($this->_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+        ldap_set_option($this->_conn, LDAP_OPT_REFERRALS, 0);
 
         if (!$this->_conn) {
             $this->_error = "Could not connect to LDAP server at $dc:$port";
             return false;
         }
-
-        ldap_set_option($this->_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
-        ldap_set_option($this->_conn, LDAP_OPT_REFERRALS, 0);
         return true;
     }
 
@@ -89,7 +83,7 @@ class googleLDAP {
     public function user() { return $this; }
 
     public function info($username, $attributes) {
-        $filter = '(mail=' . $this->_escapeFilter($username) . ')';
+        $filter = '(mail=' . ldap_escape($username, '', LDAP_ESCAPE_FILTER) . ')';
         $search = ldap_search($this->_conn, $this->_options['base_dn'], $filter, $attributes);
         if ($search) {
             return ldap_get_entries($this->_conn, $search);
@@ -129,8 +123,8 @@ class googleLDAP {
         // ── Step 1: file-first check for designated nested groups ──────────
         // Groups listed in nested_group_files are checked via a pre-built flat
         // file only — LDAP queries are skipped entirely for these groups.
-        // To mark a group as nested, add it to 'nested_group_files' in
-        // $adldap_options (config.php) and keep the file up to date by cron.
+        // To mark a group as nested, add it to $google_nested_group_files in
+        // config.php and add_group() in sync_group_members.sh.
         $nestedFiles = isset($this->_options['nested_group_files'])
             ? $this->_options['nested_group_files']
             : array();
@@ -155,7 +149,7 @@ class googleLDAP {
             $search = ldap_search(
                 $this->_conn,
                 $this->_options['base_dn'],
-                '(mail=' . $this->_escapeFilter($username) . ')',
+                '(mail=' . ldap_escape($username, '', LDAP_ESCAPE_FILTER) . ')',
                 array('dn', 'memberof')
             );
             if (!$search) { return false; }
@@ -196,7 +190,7 @@ class googleLDAP {
             $search = ldap_search(
                 $this->_conn,
                 $this->_options['base_dn'],
-                '(cn=' . $this->_escapeFilter($cnValue) . ')',
+                '(cn=' . ldap_escape($cnValue, '', LDAP_ESCAPE_FILTER) . ')',
                 array('dn', 'member')
             );
 
@@ -242,22 +236,6 @@ class googleLDAP {
     }
 
     public function getLastError() { return $this->_error; }
-
-    /**
-     * Escape a value for use inside an LDAP search filter (RFC 4515).
-     * The username comes straight from $_POST, so it must not be able to
-     * change the filter structure (e.g. "*" or ")(uid=*").
-     */
-    protected function _escapeFilter($value) {
-        if (function_exists('ldap_escape')) {
-            return ldap_escape($value, '', LDAP_ESCAPE_FILTER);
-        }
-        return str_replace(
-            array('\\', '*', '(', ')', "\0"),
-            array('\\5c', '\\2a', '\\28', '\\29', '\\00'),
-            $value
-        );
-    }
 
     public function close() {
         if ($this->_conn && is_resource($this->_conn)) {
